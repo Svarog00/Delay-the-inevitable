@@ -10,8 +10,8 @@ namespace Assets.Code.Props
     {
         public Vector2 Trajectory
         {
-            get => _trajectory;
-            set => _trajectory = value;
+            get => _direction;
+            set => _direction = value;
         }
 
         public GameObject Shooter
@@ -21,8 +21,9 @@ namespace Assets.Code.Props
         }
 
         [SerializeField] private int _damage = 0;
+        [SerializeField] private float _speed;
 
-        private Vector2 _trajectory = new Vector2(0, 0);
+        private Vector2 _direction;
         private GameObject _shooter;
 
         // Start is called before the first frame update
@@ -34,7 +35,8 @@ namespace Assets.Code.Props
         private void Update()
         {
             Vector2 currentPosition = new Vector2(transform.position.x, transform.position.y);
-            Vector2 newPosition = currentPosition + _trajectory * Time.deltaTime;
+            Vector2 newPosition = currentPosition + _direction * Time.deltaTime * _speed;
+
             RaycastHit2D[] hits = Physics2D.LinecastAll(currentPosition, newPosition);
 
             foreach (RaycastHit2D hit in hits)

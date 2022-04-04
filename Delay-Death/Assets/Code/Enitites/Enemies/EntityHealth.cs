@@ -4,6 +4,8 @@ namespace Assets.Code.Enitites.Enemies
 {
     public class EntityHealth : IHealth
     {
+        public int CurHealht => _currentHealth;
+
         public event EventHandler OnDieEventHandler;
 
         private int _healthPoints;

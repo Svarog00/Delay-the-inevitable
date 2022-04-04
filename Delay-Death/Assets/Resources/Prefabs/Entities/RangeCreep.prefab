@@ -142,6 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aed88c8ab860dab418edbcef5b363307, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  curHealth: 0
   _uiInformer: {fileID: 8666312904994274450}
   _healthPoints: 15
   _timeForKill: 5
@@ -179,9 +180,10 @@ MonoBehaviour:
   Animator: {fileID: 5020249925229424613}
   Damage: 10
   AttackDistance: 2
-  ChillTime: 1
+  ChillTime: 1.2
   _shotPrefab: {fileID: 1785092898472133580, guid: 8e8e86e90f3f2a745adfaf43ba8ac901, type: 3}
   _firePoint: {fileID: 7369574087315977506}
+  _shotSpeed: 5
 --- !u!50 &7369574087042125191
 Rigidbody2D:
   serializedVersion: 4
@@ -452,7 +454,7 @@ Animator:
   m_GameObject: {fileID: 8812512831961155339}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8d39364fb727dd144818d3bc580f9496, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

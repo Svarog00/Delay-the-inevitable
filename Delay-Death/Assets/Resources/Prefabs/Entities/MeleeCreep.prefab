@@ -93,7 +93,7 @@ Animator:
   m_GameObject: {fileID: 2086460825746570294}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 534927b518d42444ea9903117b5ca6a3, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -219,7 +219,7 @@ MonoBehaviour:
   Animator: {fileID: 3641344384363287616}
   Damage: 10
   AttackDistance: 0.46
-  ChillTime: 0.75
+  ChillTime: 1.2
   _attackLayer:
     serializedVersion: 2
     m_Bits: 4294967295

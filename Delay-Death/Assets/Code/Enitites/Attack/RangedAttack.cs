@@ -12,19 +12,21 @@ namespace Assets.Code.Enitites.Attack
     {
 		[SerializeField] private GameObject _shotPrefab;
 		[SerializeField] private Transform _firePoint;
+		[SerializeField] private float _shotSpeed;
 
 		public override void Attack()
 		{
 			if (CurChillTime <= 0)
 			{
+				Animator.SetTrigger("Attack");
 				Shoot();
 			}
 		}
 
 		private void Shoot()
         {
-			GameObject shotTransform = Instantiate(_shotPrefab, _firePoint.position, _firePoint.rotation.normalized);
-			shotTransform.GetComponent<ShotScript>().Trajectory = new Vector2(5, 5) * Direction;
+			GameObject shotTransform = Instantiate(_shotPrefab, _firePoint.position, Quaternion.identity);
+			shotTransform.GetComponent<ShotScript>().Trajectory = Direction;
 			shotTransform.GetComponent<ShotScript>().Shooter = gameObject;
 			//AudioManager.Instance.Play("Shot");
 

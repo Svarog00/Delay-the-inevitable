@@ -13,6 +13,7 @@ public class Entity : MonoBehaviour, IDamagable, IPoolable
 {
     public float AgressionDistance { get; internal set; }
 
+    public int curHealth;
     private const string PlayerTag = "Player";
 
     [SerializeField] private UiInformerScript _uiInformer;
@@ -82,6 +83,7 @@ public class Entity : MonoBehaviour, IDamagable, IPoolable
 
     public void Hurt(int damage)
     {
+        print(gameObject.tag);
         _enemyHealth.Hurt(damage);
     }
 
@@ -92,6 +94,7 @@ public class Entity : MonoBehaviour, IDamagable, IPoolable
 
     private void Update()
     {
+        curHealth = _enemyHealth.CurHealht;
         _stateMachine.Work();
     }
 
