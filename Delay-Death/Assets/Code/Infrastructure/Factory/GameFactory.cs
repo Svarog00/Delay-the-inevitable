@@ -12,6 +12,11 @@ namespace Assets.Scripts.Infrastructure.Factory
             _assets = assetProvider;
         }
 
+        public void CreateGameStateManager()
+        {
+            _assets.Instantiate(AssetPaths.GameStateManager);
+        }
+
         public GameObject CreateHero(GameObject initialPoint)
         {
             return _assets.Instantiate(AssetPaths.PlayerPath, position: initialPoint.transform.position);
@@ -22,9 +27,14 @@ namespace Assets.Scripts.Infrastructure.Factory
             _assets.Instantiate(AssetPaths.UIPath);
         }
 
-        public GameObject CreateHookInstance(Transform casterPosition)
+        public GameObject CreatePlayerBodyManager()
         {
-            return _assets.Instantiate(AssetPaths.HookInstancePath, casterPosition.position);
+            return _assets.Instantiate(AssetPaths.PlayerBodyManager);
+        }
+
+        public void CreateSpawners()
+        {
+            _assets.Instantiate(AssetPaths.Setup);
         }
     }
 }

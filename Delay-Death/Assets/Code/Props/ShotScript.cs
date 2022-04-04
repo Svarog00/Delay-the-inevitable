@@ -13,15 +13,17 @@ namespace Assets.Code.Props
             get => _trajectory;
             set => _trajectory = value;
         }
+
         public GameObject Shooter
         {
             get => _shooter;
             set => _shooter = value;
         }
 
-        [SerializeField] private Vector2 _trajectory = new Vector2(0, 0);
-        [SerializeField] private GameObject _shooter;
         [SerializeField] private int _damage = 0;
+
+        private Vector2 _trajectory = new Vector2(0, 0);
+        private GameObject _shooter;
 
         // Start is called before the first frame update
         void Start()
@@ -37,9 +39,9 @@ namespace Assets.Code.Props
 
             foreach (RaycastHit2D hit in hits)
             {
-                if (hit.collider.GetComponent<IHealth>() != null || hit.collider.gameObject != _shooter)
+                if (hit.collider.GetComponent<IDamagable>() != null && hit.collider.gameObject != _shooter)
                 {
-                    hit.collider.GetComponent<IHealth>().Hurt(_damage);
+                    hit.collider.GetComponent<IDamagable>().Hurt(_damage);
                     Destroy(gameObject);
                 }
                 if (hit.collider.tag == "Border")
@@ -48,7 +50,6 @@ namespace Assets.Code.Props
                 }
                 else
                 {
-                    Destroy(gameObject);
                     break;
                 }
             }
