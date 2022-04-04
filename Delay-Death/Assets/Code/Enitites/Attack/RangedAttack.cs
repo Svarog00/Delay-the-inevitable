@@ -17,14 +17,20 @@ namespace Assets.Code.Enitites.Attack
 		{
 			if (CurChillTime <= 0)
 			{
-				GameObject shotTransform = Instantiate(_shotPrefab, _firePoint.position, _firePoint.rotation.normalized);
-				shotTransform.GetComponent<ShotScript>().Trajectory = new Vector2(5, 5) * -Direction;
-				shotTransform.GetComponent<ShotScript>().Shooter = gameObject;
-				//AudioManager.Instance.Play("Shot");
-				
-				CurChillTime = ChillTime; //Pause between attacks
-				StartCoroutine(Cooldown());
+				Shoot();
 			}
 		}
+
+		private void Shoot()
+        {
+			GameObject shotTransform = Instantiate(_shotPrefab, _firePoint.position, _firePoint.rotation.normalized);
+			shotTransform.GetComponent<ShotScript>().Trajectory = new Vector2(5, 5) * Direction;
+			shotTransform.GetComponent<ShotScript>().Shooter = gameObject;
+			//AudioManager.Instance.Play("Shot");
+
+			CurChillTime = ChillTime; //Pause between attacks
+			StartCoroutine(Cooldown());
+		}
+
 	}
 }

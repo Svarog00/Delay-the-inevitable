@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Infrastructure.Factory;
+﻿using Assets.Code.Global;
+using Assets.Scripts.Infrastructure.Factory;
 using Assets.Scripts.Infrustructure;
 using UnityEngine;
 
@@ -26,10 +27,16 @@ namespace Assets.Scripts.Infrastructure
 
         private void OnLoaded()
         {
-            GameObject hero = _gameFactory.CreateHero(GameObject.FindGameObjectWithTag(InitialPointTag));
+            _gameFactory.CreateGameStateManager();
+            GameObject bodyManager = _gameFactory.CreatePlayerBodyManager();
 
             _gameFactory.CreateHud();
 
+            GameObject hero = _gameFactory.CreateHero(GameObject.FindGameObjectWithTag(InitialPointTag));
+            bodyManager.GetComponent<PlayerBodyManager>().SetStartBody(hero);
+
+            _gameFactory.CreateSpawners();
+     
             CameraFollow(hero);
 
             _stateMachine.Enter<GameLoopState>();

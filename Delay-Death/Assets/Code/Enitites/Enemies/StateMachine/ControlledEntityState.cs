@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Infrastructure.Services;
+using UnityEngine;
 
 namespace Assets.Code.Enitites.Enemies.StateMachine
 {
@@ -11,11 +12,11 @@ namespace Assets.Code.Enitites.Enemies.StateMachine
 
         private IInputService _inputInputService;
 
-        private Enemy _agentContext;
+        private Entity _agentContext;
         private EnemyMovement _enemyMovement;
         private EntityAttack _attackScript;
 
-        public ControlledEntityState(EntityStateMachine entityStateMachine, Enemy context, IInputService inputService)
+        public ControlledEntityState(EntityStateMachine entityStateMachine, Entity context, IInputService inputService)
         {
             _stateMachine = entityStateMachine;
             _inputInputService = inputService;
@@ -43,13 +44,15 @@ namespace Assets.Code.Enitites.Enemies.StateMachine
 
             if(_inputInputService.IsMeleeAttackButtonDown())
             {
+                Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                _attackScript.Direction = (mousePosition - _agentContext.transform.position).normalized;
                 _attackScript.Attack();
             }
         }
 
         public void Enter()
         {
-            _agentContext.tag = PlayerTag;
+            _agentContext.gameObject.tag = PlayerTag;
         }
 
         public void Exit()

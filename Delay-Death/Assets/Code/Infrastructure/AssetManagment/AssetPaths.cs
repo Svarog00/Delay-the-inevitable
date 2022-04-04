@@ -2,10 +2,12 @@
 {
     public static class AssetPaths
     {
-        public const string PlayerPath = "Prefabs/Entities/Player";
+        public const string PlayerPath = "Prefabs/Player/PlayerStartBody";
         public const string UIPath = "Prefabs/UI/Canvas";
-        public const string GhoulPath = "Prefabs/Entities/Ghoul";
-        public const string TextInformerPath = "Prefabs/UI/UITextInformer";
-        public const string HookInstancePath = "Prefabs/Props/HookObj";
+        public const string MeleeCreep = "Prefabs/Entities/MeleeCreep";
+        public const string RangeCreep = "Prefabs/Entities/RangeCreep";
+        public const string Setup = "Prefabs/Global/Setup";
+        public const string GameStateManager = "Prefabs/Global/GameStateManager";
+        public const string PlayerBodyManager = "Prefabs/Global/PlayerBodyManager";
     }
 }

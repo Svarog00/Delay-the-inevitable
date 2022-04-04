@@ -6,7 +6,10 @@ namespace Assets.Scripts.Infrastructure.Factory
     public interface IGameFactory : IService
     {
         GameObject CreateHero(GameObject position);
+        GameObject CreatePlayerBodyManager();
+
         void CreateHud();
-        GameObject CreateHookInstance(Transform casterPosition);
+        void CreateSpawners();
+        void CreateGameStateManager();
     }
 }

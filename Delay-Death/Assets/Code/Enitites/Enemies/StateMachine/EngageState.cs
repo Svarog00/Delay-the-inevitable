@@ -7,9 +7,9 @@ namespace Assets.Code.Enitites.Enemies.StateMachine
         private EntityAttack _attack;
 
         private EntityStateMachine _stateMachine;
-        private Enemy _agentContext;
+        private Entity _agentContext;
 
-        public EngageState(Enemy agentContext, EntityStateMachine stateMachine)
+        public EngageState(Entity agentContext, EntityStateMachine stateMachine)
         {
             _agentContext = agentContext;
             _stateMachine = stateMachine;
@@ -24,12 +24,13 @@ namespace Assets.Code.Enitites.Enemies.StateMachine
 
         public void Handle()
         {
-            if (_agentContext.DistanceToPlayer > _attack.AttackDistanceGetter)
+            if (_agentContext.GetDistanceToPlayer() > _attack.AttackDistanceGetter)
             {
                 _stateMachine.Enter<ChaseState>();
             }
             else
             {
+                _attack.DistanceToPlayer = _agentContext.GetDistanceToPlayer();
                 _attack.Direction = _agentContext.GetDirectionToPlayer();
                 _attack.Attack();
             }

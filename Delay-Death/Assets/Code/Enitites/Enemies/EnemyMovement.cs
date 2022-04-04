@@ -3,23 +3,22 @@ using UnityEngine;
 
 namespace Assets.Code.Enitites.Enemies
 { 
-    [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(Rigidbody2D))]
     public class EnemyMovement : MonoBehaviour
     {
         private readonly string SpeedAnimatorTag = "Speed";
 
+        [SerializeField] private GameObject _visual;
         [SerializeField] private Animator _animator;
         [SerializeField] private Rigidbody2D _rb2;
         [SerializeField] private float _movementSpeed;
+        [SerializeField] private bool _faceRight = true;
 
         private Vector2 _movement;
-        private bool _faceRight = true;
         private float _currentSpeed;
 
         private void Start()
         {
-            _animator = GetComponent<Animator>();
             _rb2 = GetComponent<Rigidbody2D>();
         }
 
@@ -57,11 +56,11 @@ namespace Assets.Code.Enitites.Enemies
         private void ChangeAnimationDir()
         {
             Vector2 _direction = _movement;
-            if (_direction.x > 0 && _faceRight == true)
+            if (_direction.x > 0 && _faceRight == false)
             {
                 Flip();
             }
-            if (_direction.x < 0 && _faceRight == false)
+            if (_direction.x < 0 && _faceRight == true)
             {
                 Flip();
             }
@@ -70,9 +69,9 @@ namespace Assets.Code.Enitites.Enemies
         private void Flip()
         {
             _faceRight = !_faceRight;
-            Vector3 Scaler = gameObject.transform.localScale;
-            Scaler.x *= -1;
-            transform.localScale = Scaler;
+            Vector3 scaler = transform.localScale;
+            scaler.x *= -1;
+            transform.localScale = scaler;
         }
 
         private void AnimateMove()

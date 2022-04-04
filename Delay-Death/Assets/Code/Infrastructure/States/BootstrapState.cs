@@ -34,7 +34,7 @@ namespace Assets.Scripts.Infrastructure
 
         private void EnterLoadLevel()
         {
-            _stateMachine.Enter<LoadLevelState, string>("ExperimentalScene");
+            _stateMachine.Enter<LoadLevelState, string>("SampleScene");
         }
 
         private void RegisterServices()

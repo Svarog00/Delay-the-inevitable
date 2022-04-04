@@ -8,11 +8,11 @@ namespace Assets.Code.Enitites.Enemies.StateMachine
 		private EntityAttack _attackScript;
 
         private EntityStateMachine _stateMachine;
-		private Enemy _agentContext;
+		private Entity _agentContext;
 
         private Vector2 _direction;
 
-        public ChaseState(Enemy agentContext, EntityStateMachine stateMachine)
+        public ChaseState(Entity agentContext, EntityStateMachine stateMachine)
         {
 			_agentContext = agentContext;
 			_stateMachine = stateMachine;
@@ -31,7 +31,7 @@ namespace Assets.Code.Enitites.Enemies.StateMachine
 			_direction = _agentContext.GetDirectionToPlayer();
 			_movement.HandleMove(_direction);
 
-			if (_agentContext.DistanceToPlayer <= _attackScript.AttackDistanceGetter) //Если игрок слишком близко, то остановиться для атаки
+			if (_agentContext.GetDistanceToPlayer() <= _attackScript.AttackDistanceGetter) //Если игрок слишком близко, то остановиться для атаки
 			{
 				_movement.Stop();
 				_stateMachine.Enter<EngageState>();
