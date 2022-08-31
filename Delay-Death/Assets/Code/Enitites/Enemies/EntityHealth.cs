@@ -4,17 +4,17 @@ namespace Assets.Code.Enitites.Enemies
 {
     public class EntityHealth : IHealth
     {
-        public int CurHealht => _currentHealth;
+        public int CurHealth => _currentHealth;
 
         public event EventHandler OnDieEventHandler;
 
-        private int _healthPoints;
+        private int _maxHealthPoints;
         private int _currentHealth;
 
         public EntityHealth(int initialHealthPoints)
         {
-            _healthPoints = initialHealthPoints;
-            _currentHealth = _healthPoints;
+            _maxHealthPoints = initialHealthPoints;
+            _currentHealth = _maxHealthPoints;
         }
 
         public void Hurt(int damage)
@@ -36,7 +36,7 @@ namespace Assets.Code.Enitites.Enemies
 
         public void Reset()
         {
-            _currentHealth = _healthPoints;
+            _currentHealth = _maxHealthPoints;
         }
 
     }

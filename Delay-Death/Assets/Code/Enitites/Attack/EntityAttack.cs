@@ -16,6 +16,12 @@ namespace Assets.Code.Enitites
         {
             get; set;
         }
+
+        public int DamageProperty
+        {
+            get => Damage;
+            set => Damage = value;
+        }
         
         [SerializeField] protected Transform AttackPoint = null;
         [SerializeField] protected Animator Animator;

@@ -20,6 +20,12 @@ namespace Assets.Code.Props
             set => _shooter = value;
         }
 
+        public int Damage 
+        { 
+            get => _damage; 
+            set => _damage = value; 
+        }
+
         [SerializeField] private int _damage = 0;
         [SerializeField] private float _speed;
 

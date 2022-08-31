@@ -1,9 +1,4 @@
 ﻿using Assets.Code.Props;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Assets.Code.Enitites.Attack
@@ -26,8 +21,11 @@ namespace Assets.Code.Enitites.Attack
 		private void Shoot()
         {
 			GameObject shotTransform = Instantiate(_shotPrefab, _firePoint.position, Quaternion.identity);
-			shotTransform.GetComponent<ShotScript>().Trajectory = Direction;
-			shotTransform.GetComponent<ShotScript>().Shooter = gameObject;
+			ShotScript shotScript = shotTransform.GetComponent<ShotScript>();
+			shotScript.Trajectory = Direction;
+			shotScript.Shooter = gameObject;
+			shotScript.Damage = Damage;
+			
 			//AudioManager.Instance.Play("Shot");
 
 			CurChillTime = ChillTime; //Pause between attacks

@@ -13,7 +13,6 @@ public class Entity : MonoBehaviour, IDamagable, IPoolable
 {
     public float AgressionDistance { get; internal set; }
 
-    public int curHealth;
     private const string PlayerTag = "Player";
 
     [SerializeField] private UiInformerScript _uiInformer;
@@ -21,12 +20,17 @@ public class Entity : MonoBehaviour, IDamagable, IPoolable
     [SerializeField] private float _timeForKill;
     [SerializeField] private float _decayTime;
 
-    private GameStateManager _gameStateManager;
-    private PlayerBodyManager _bodyManager;
+    //Global managers to control flow of the game
+    private GameStateManager _gameStateManager; //To reset timers
+    private PlayerBodyManager _bodyManager; //To change body of player on new one
+
     private ObjectPool _objectPool;
+
+    private GameObject _player;
+
     private EntityStateMachine _stateMachine;
     private EntityHealth _enemyHealth;
-    private GameObject _player;
+
     private IInputService _gameInput;
 
     // Start is called before the first frame update
@@ -83,7 +87,6 @@ public class Entity : MonoBehaviour, IDamagable, IPoolable
 
     public void Hurt(int damage)
     {
-        print(gameObject.tag);
         _enemyHealth.Hurt(damage);
     }
 
@@ -94,7 +97,6 @@ public class Entity : MonoBehaviour, IDamagable, IPoolable
 
     private void Update()
     {
-        curHealth = _enemyHealth.CurHealht;
         _stateMachine.Work();
     }
 
@@ -112,19 +114,19 @@ public class Entity : MonoBehaviour, IDamagable, IPoolable
     {
         if(_gameInput.IsInteractButtonDown())
         {
-            if(_stateMachine.CurrentState is DecayState)
-            {
-                AssumeControl();
-            }
+            AssumeControl();
         }
     }
 
     private void AssumeControl()
     {
-        _uiInformer.Disappear(.1f);
-        _stateMachine.Enter<ControlledEntityState>();
-        _gameStateManager.ResetTimer(_timeForKill);
-        _bodyManager.SwapBodies(gameObject);
+        if (_stateMachine.CurrentState is DecayState)
+        {
+            _uiInformer.Disappear(.1f);
+            _stateMachine.Enter<ControlledEntityState>();
+            _gameStateManager.ResetTimer(_timeForKill);
+            _bodyManager.SwapBodies(gameObject);
+        }
     }
 
     private void OnDisable()
